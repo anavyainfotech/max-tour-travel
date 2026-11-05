@@ -53,7 +53,7 @@ const locationsData: LocationInfo[] = [
   }
 ];
 
-export default function LocationsSection({ onSelectLocation }: { onSelectLocation: (loc: string) => void }) {
+export default function LocationsSection({ onSelectLocation }: { onSelectLocation?: (loc: string) => void }) {
   return (
     <section id="locations" className="py-20 px-4 bg-orange-50/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,19 +132,28 @@ export default function LocationsSection({ onSelectLocation }: { onSelectLocatio
                 </div>
 
                 <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
-                  <button
-                    onClick={() => onSelectLocation(loc.name)}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-orange-600 hover:text-orange-700 uppercase tracking-wider group-hover:translate-x-1 transition-transform cursor-pointer"
-                  >
-                    View All {loc.name} Tours <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                  <a
-                    href="#ticket-booking"
+                  {onSelectLocation ? (
+                    <button
+                      onClick={() => onSelectLocation(loc.name)}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-orange-600 hover:text-orange-700 uppercase tracking-wider group-hover:translate-x-1 transition-transform cursor-pointer"
+                    >
+                      View All {loc.name} Tours <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  ) : (
+                    <Link
+                      href="/tours"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-orange-600 hover:text-orange-700 uppercase tracking-wider group-hover:translate-x-1 transition-transform"
+                    >
+                      View All {loc.name} Tours <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  )}
+                  <Link
+                    href="/booking"
                     className="p-2 rounded-full bg-orange-100 text-orange-600 hover:bg-orange-500 hover:text-white transition-colors"
                     title="Book ticket to this destination"
                   >
                     <Landmark className="w-4 h-4" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

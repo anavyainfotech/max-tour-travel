@@ -44,17 +44,18 @@ export default function Footer() {
           {/* Col 2: Quick Links */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-4">
-              QUICK NAVIGATION
+              PAGES &amp; SECTIONS
             </h4>
             <ul className="space-y-2 text-xs text-stone-400 font-light">
-              <li><NextLink href="#home" className="hover:text-white transition-colors">Home Page</NextLink></li>
-              <li><NextLink href="#all-tours" className="hover:text-white transition-colors">All Tours &amp; Packages</NextLink></li>
-              <li><NextLink href="#seasonal-tours" className="hover:text-white transition-colors">Seasonal Tours</NextLink></li>
-              <li><NextLink href="#locations" className="hover:text-white transition-colors">Destinations (Bodhgaya, Gaya, Patna, Rajgir)</NextLink></li>
-              <li><NextLink href="#ticket-booking" className="hover:text-white transition-colors">Ticket Booking (Car, Bus, Flight, Hotel)</NextLink></li>
-              <li><NextLink href="#about" className="hover:text-white transition-colors">About Us</NextLink></li>
-              <li><NextLink href="#our-team" className="hover:text-white transition-colors">Our Team (Rohit, Mohit, Sohan)</NextLink></li>
-              <li><NextLink href="#registration" className="hover:text-white transition-colors">User Registration</NextLink></li>
+              <li><NextLink href="/" className="hover:text-white transition-colors">Home Page</NextLink></li>
+              <li><NextLink href="/tours" className="hover:text-white transition-colors">All Tours &amp; Packages</NextLink></li>
+              <li><NextLink href="/seasonal-tours" className="hover:text-white transition-colors">Seasonal Tours</NextLink></li>
+              <li><NextLink href="/locations" className="hover:text-white transition-colors">Destinations (Bodhgaya, Gaya, Patna, Rajgir)</NextLink></li>
+              <li><NextLink href="/booking" className="hover:text-white transition-colors">Ticket Booking (Car, Bus, Flight, Hotel)</NextLink></li>
+              <li><NextLink href="/about" className="hover:text-white transition-colors">About Us</NextLink></li>
+              <li><NextLink href="/team" className="hover:text-white transition-colors">Our Team (Rohit, Mohit, Sohan)</NextLink></li>
+              <li><NextLink href="/register" className="hover:text-white transition-colors">User Registration</NextLink></li>
+              <li><NextLink href="/contact" className="hover:text-white transition-colors">Contact Us</NextLink></li>
             </ul>
           </div>
 
@@ -64,11 +65,11 @@ export default function Footer() {
               SACRED DESTINATIONS
             </h4>
             <ul className="space-y-2 text-xs text-stone-400 font-light">
-              <li><NextLink href="#locations" className="hover:text-white transition-colors">Bodhgaya — Mahabodhi Temple &amp; Bodhi Tree</NextLink></li>
-              <li><NextLink href="#locations" className="hover:text-white transition-colors">Gaya — Vishnupad Mandir &amp; Pind Daan</NextLink></li>
-              <li><NextLink href="#locations" className="hover:text-white transition-colors">Rajgir — Glass Bridge, Ropeway &amp; Hot Springs</NextLink></li>
-              <li><NextLink href="#locations" className="hover:text-white transition-colors">Patna — Golghar, Takht Sri Patna Sahib</NextLink></li>
-              <li><NextLink href="#all-tours" className="hover:text-white transition-colors">Nalanda University Ruins Special Excursion</NextLink></li>
+              <li><NextLink href="/locations" className="hover:text-white transition-colors">Bodhgaya — Mahabodhi Temple &amp; Bodhi Tree</NextLink></li>
+              <li><NextLink href="/locations" className="hover:text-white transition-colors">Gaya — Vishnupad Mandir &amp; Pind Daan</NextLink></li>
+              <li><NextLink href="/locations" className="hover:text-white transition-colors">Rajgir — Glass Bridge, Ropeway &amp; Hot Springs</NextLink></li>
+              <li><NextLink href="/locations" className="hover:text-white transition-colors">Patna — Golghar, Takht Sri Patna Sahib</NextLink></li>
+              <li><NextLink href="/tours" className="hover:text-white transition-colors">Nalanda University Ruins Special Excursion</NextLink></li>
             </ul>
           </div>
 
@@ -93,7 +94,7 @@ export default function Footer() {
             </div>
             <div className="mt-5">
               <NextLink
-                href="#ticket-booking"
+                href="/booking"
                 className="inline-block w-full py-2.5 rounded-full bg-orange-600 hover:bg-orange-500 text-white text-center text-xs font-bold uppercase tracking-wider transition-colors"
               >
                 Instant Ticket Booking
