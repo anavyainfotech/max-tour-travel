@@ -1,61 +1,41 @@
 "use client";
 
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
+import MmtHeroSearch from "@/components/MmtHeroSearch";
+import TicketBookingSection from "@/components/TicketBookingSection";
 import AllToursSection from "@/components/AllToursSection";
 import LocationsSection from "@/components/LocationsSection";
-import TicketBookingSection from "@/components/TicketBookingSection";
 import AboutAndTeamSection from "@/components/AboutAndTeamSection";
 import RegistrationAndContactSection from "@/components/RegistrationAndContactSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-  const [filterLocation, setFilterLocation] = useState("");
-  const [filterVehicle, setFilterVehicle] = useState("");
-
-  const handleHeroSearch = (location: string, vehicle: string) => {
-    setFilterLocation(location);
-    setFilterVehicle(vehicle);
-  };
-
-  const handleSelectLocation = (location: string) => {
-    setFilterLocation(location);
-    const element = document.getElementById("all-tours");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      {/* 1. Header & Navigation (Logo, Home, All Tours, Seasonal Tours, About Us, Our Team, Ticket Booking, Contact Us, Registration) */}
+    <div className="min-h-screen flex flex-col bg-[#f4f7fb]">
+      {/* 1. Header & Navigation Bar */}
       <Navbar />
 
       <main className="flex-grow">
-        {/* 2. Animated Hero Section with Interactive Searching Page (Location & Vehicle Selection) */}
-        <HeroSection onSearch={handleHeroSearch} />
+        {/* 2. MakeMyTrip Style Hero with Floating Flight/Cab/Hotel Booking Card */}
+        <MmtHeroSearch />
 
-        {/* 3. Ticket Booking Section (Car Ticket, Bus Ticket, Flight/Flet Ticket, Hotel Booking) */}
+        {/* 3. Ticket Booking Component (Outstation Cab, Deluxe Bus, Flight, Verified Hotels) */}
         <TicketBookingSection />
 
-        {/* 4. All Tours Section (Destination, Location, Vehicles: Car, Bus, Flight) + Seasonal Tours filter */}
-        <AllToursSection
-          filterLocation={filterLocation}
-          filterVehicle={filterVehicle}
-        />
+        {/* 4. Curated Holiday Packages with Filters */}
+        <AllToursSection />
 
-        {/* 5. Locations Section (Bodhgaya, Gaya, Patna, Rajgir spotlight) */}
-        <LocationsSection onSelectLocation={handleSelectLocation} />
+        {/* 5. Destination Spotlight (Bodhgaya, Gaya, Patna, Rajgir) */}
+        <LocationsSection />
 
-        {/* 6. About Us & Our Team Section (Rohit, Mohit, Sohan) */}
+        {/* 6. Company Background & Leadership Team (Rohit, Mohit, Sohan) */}
         <AboutAndTeamSection />
 
-        {/* 7. Registration & Contact Us Section (Mobile, Instagram, Facebook, Youtube, Email, Map) */}
+        {/* 7. Registration Voucher & Contact Channels */}
         <RegistrationAndContactSection />
       </main>
 
-      {/* 8. Footer */}
+      {/* 8. Modern Footer */}
       <Footer />
     </div>
   );
