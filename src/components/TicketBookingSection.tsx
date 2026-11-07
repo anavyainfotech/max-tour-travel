@@ -14,10 +14,11 @@ import {
   Phone, 
   User, 
   Calendar, 
-  ShieldCheck,
-  Send,
-  Star,
-  Sparkles
+  ShieldCheck, 
+  Send, 
+  Sparkles,
+  ArrowRight,
+  BadgeCheck
 } from "lucide-react";
 import confetti from "canvas-confetti";
 
@@ -27,7 +28,7 @@ export default function TicketBookingSection() {
     name: "",
     phone: "",
     email: "",
-    destination: "Bodhgaya",
+    destination: "Gaya & Bodhgaya Pilgrimage",
     travelDate: "",
     passengers: "2",
     vehicleModel: "Innova Crysta AC",
@@ -49,385 +50,323 @@ export default function TicketBookingSection() {
     }
   };
 
+  const tabs = [
+    { id: "car", label: "Outstation AC Cab", icon: Car, subtitle: "Sedan, Innova Crysta, Tempo" },
+    { id: "bus", label: "Deluxe Bus Booking", icon: Bus, subtitle: "Volvo & Tourist Coaches" },
+    { id: "flight", label: "Flight / Train Assistance", icon: Plane, subtitle: "Patna & Gaya Airport" },
+    { id: "hotel", label: "Verified Hotels & Ashrams", icon: Hotel, subtitle: "Near Vishnupad & Mahabodhi" },
+  ] as const;
+
   return (
-    <section id="ticket-booking" className="py-16 px-4 bg-[#f4f7fb]">
+    <section id="ticket-booking" className="py-16 px-4 bg-[#f5f7fa]">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
           <div>
             <span className="text-xs font-bold tracking-widest uppercase text-orange-600 block mb-1">
-              INSTANT CONFIRMATION
+              INSTANT CONFIRMATION · ZERO HIDDEN FARES
             </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 tracking-tight">
-              Book Tickets, Cabs &amp; Stays in Bihar
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
+              Book Tickets, Cabs &amp; Stays in Gaya Circuit
             </h2>
-            <p className="text-xs sm:text-sm text-gray-500 font-normal mt-1">
-              Select your service, choose travel dates and get instant quotation with zero commission.
+            <p className="text-xs sm:text-sm text-slate-500 font-normal mt-1 max-w-2xl">
+              Select your travel mode, pick preferred dates, and get immediate fare quotation with dedicated chauffeur assistance.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-gray-500 bg-white px-3 py-1.5 rounded-lg border border-gray-200">
-              ⚡ Instant WhatsApp Confirmation
+            <span className="text-xs font-bold text-slate-700 bg-white px-3.5 py-2 rounded-full border border-slate-200/80 shadow-2xs flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Instant WhatsApp Confirmation
             </span>
           </div>
         </div>
 
         {/* MMT Category Tabs */}
-        <div className="bg-white rounded-lg p-2 shadow-sm border border-gray-200 flex flex-wrap gap-2 mb-6">
-          <button
-            type="button"
-            onClick={() => setActiveTab("car")}
-            className={`flex-1 min-w-[130px] py-3 px-4 rounded-lg font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
-              activeTab === "car"
-                ? "bg-orange-500 text-white shadow-sm"
-                : "text-gray-600 hover:bg-gray-50"
-            }`}
-          >
-            <Car className="w-4 h-4" />
-            <span>Outstation Cab</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab("bus")}
-            className={`flex-1 min-w-[130px] py-3 px-4 rounded-lg font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
-              activeTab === "bus"
-                ? "bg-orange-500 text-white shadow-sm"
-                : "text-gray-600 hover:bg-gray-50"
-            }`}
-          >
-            <Bus className="w-4 h-4" />
-            <span>Deluxe Bus</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab("flight")}
-            className={`flex-1 min-w-[130px] py-3 px-4 rounded-lg font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
-              activeTab === "flight"
-                ? "bg-orange-500 text-white shadow-sm"
-                : "text-gray-600 hover:bg-gray-50"
-            }`}
-          >
-            <Plane className="w-4 h-4" />
-            <span>Flight / Train</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab("hotel")}
-            className={`flex-1 min-w-[130px] py-3 px-4 rounded-lg font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
-              activeTab === "hotel"
-                ? "bg-orange-500 text-white shadow-sm"
-                : "text-gray-600 hover:bg-gray-50"
-            }`}
-          >
-            <Hotel className="w-4 h-4" />
-            <span>Hotel Stay</span>
-          </button>
+        <div className="bg-white rounded-2xl p-2 shadow-sm border border-slate-200/80 flex flex-wrap gap-2 mb-8">
+          {tabs.map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`flex-1 min-w-[150px] py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-center gap-2 transition-all cursor-pointer ${
+                  isActive
+                    ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md shadow-orange-500/20"
+                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                }`}
+              >
+                <div className={`p-1.5 rounded-lg ${isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"}`}>
+                  <Icon className="w-4 h-4" />
+                </div>
+                <div className="text-center sm:text-left">
+                  <div>{tab.label}</div>
+                  <div className={`text-[10px] font-normal ${isActive ? "text-orange-100" : "text-slate-400"}`}>
+                    {tab.subtitle}
+                  </div>
+                </div>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Tab Detail Cards + Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {/* Content Box: Left Form + Right Real-world Fleet & Visual Proof */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Left Feature Showcase Card */}
-          <div className="lg:col-span-5 bg-white rounded-lg p-6 border border-gray-200 shadow-sm space-y-5">
-            {activeTab === "car" && (
-              <>
-                <div className="relative w-full h-48 rounded-lg overflow-hidden bg-gray-100">
-                  <Image
-                    src="/images/luxury-travel.jpg"
-                    alt="Car Ticket Rental"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-md flex items-center gap-1.5">
-                    <Car className="w-3.5 h-3.5 text-orange-400" /> Sedan &amp; Innova Crysta
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">
-                  Outstation Chauffeur Cabs &amp; Airport Taxi
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
-                  Guaranteed on-time pickup from Gaya International Airport (GAY), Patna Airport (PAT), and round-trips to Bodhgaya, Rajgir, and Nalanda.
-                </p>
-                <div className="space-y-2.5 pt-1">
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>Commercial Yellow Plate verified luxury vehicles</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>All Tolls, State Taxes &amp; Driver Allowances Included</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>Zero Cancellation fee up to 6 hours before journey</span>
-                  </div>
-                </div>
-                <div className="p-3.5 bg-orange-50 rounded-lg border border-orange-200 flex items-center justify-between">
-                  <span className="text-xs text-orange-700 font-bold">Gaya Airport ⇄ Bodhgaya Taxi</span>
-                  <span className="text-base font-black text-gray-900">₹799 Only</span>
-                </div>
-              </>
-            )}
-
-            {activeTab === "bus" && (
-              <>
-                <div className="relative w-full h-48 rounded-lg overflow-hidden bg-gray-100">
-                  <Image
-                    src="/images/luxury-travel.jpg"
-                    alt="Bus Ticket Booking"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-md flex items-center gap-1.5">
-                    <Bus className="w-3.5 h-3.5 text-sky-400" /> AC Volvo &amp; Mini-Coaches
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">
-                  Deluxe Pilgrim &amp; Tourist Group Bus Booking
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
-                  Comfortable pushback seating buses for 17 to 45 passengers. Ideal for Buddhist meditation groups, family marriages, and heritage circuits.
-                </p>
-                <div className="space-y-2.5 pt-1">
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>Air suspension with high panoramic windows</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>Dedicated onboard luggage helper &amp; route planner</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>Full Bihar Buddhist circuit charter packages</span>
-                  </div>
-                </div>
-                <div className="p-3.5 bg-sky-50 rounded-lg border border-sky-200 flex items-center justify-between">
-                  <span className="text-xs text-sky-700 font-bold">Patna ⇄ Bodhgaya Daily Coach</span>
-                  <span className="text-base font-black text-gray-900">₹499 / Seat</span>
-                </div>
-              </>
-            )}
-
-            {activeTab === "flight" && (
-              <>
-                <div className="relative w-full h-48 rounded-lg overflow-hidden bg-gray-100">
-                  <Image
-                    src="/images/patna.jpg"
-                    alt="Flight Ticket Assistance"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-md flex items-center gap-1.5">
-                    <Plane className="w-3.5 h-3.5 text-purple-400" /> Confirmed Ticketing
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">
-                  Flight &amp; Confirmed Train Booking Desk
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
-                  Domestic and international ticketing for Gaya Airport (seasonal charters from Bangkok, Colombo, Paro) and Patna Airport with instant seat selection.
-                </p>
-                <div className="space-y-2.5 pt-1">
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>Direct connection with Indigo, Air India, SpiceJet</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>Vande Bharat &amp; Rajdhani Tatkal quota assistance</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>24x7 boarding gate &amp; terminal assistance</span>
-                  </div>
-                </div>
-                <div className="p-3.5 bg-purple-50 rounded-lg border border-purple-200 flex items-center justify-between">
-                  <span className="text-xs text-purple-700 font-bold">Delhi ⇄ Gaya / Patna Fares</span>
-                  <span className="text-base font-black text-gray-900">Best Price Assured</span>
-                </div>
-              </>
-            )}
-
-            {activeTab === "hotel" && (
-              <>
-                <div className="relative w-full h-48 rounded-lg overflow-hidden bg-gray-100">
-                  <Image
-                    src="/images/bodhgaya.jpg"
-                    alt="Hotel Booking"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-md flex items-center gap-1.5">
-                    <Hotel className="w-3.5 h-3.5 text-emerald-400" /> Handpicked Stays
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">
-                  3★, 4★ &amp; Sacred Temple Heritage Hotels
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
-                  Hand-verified properties located within walking radius of Mahabodhi Temple and Vishnupad Ghats. Free Wi-Fi, 24x7 hot water, and pure satvik dining.
-                </p>
-                <div className="space-y-2.5 pt-1">
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>Complimentary breakfast buffet &amp; mineral water</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>Pay at hotel option available</span>
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span>Special Pitrupaksha &amp; Buddha Jayanti group tariffs</span>
-                  </div>
-                </div>
-                <div className="p-3.5 bg-emerald-50 rounded-lg border border-emerald-200 flex items-center justify-between">
-                  <span className="text-xs text-emerald-700 font-bold">Bodhgaya AC Deluxe Room</span>
-                  <span className="text-base font-black text-gray-900">from ₹1,499 / Night</span>
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* Right Live Booking Form (MMT Clean Style) */}
-          <div className="lg:col-span-7 bg-white rounded-lg p-6 sm:p-8 border border-gray-200 shadow-sm">
-            {submitted ? (
-              <div className="text-center py-10 space-y-4">
-                <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-black text-gray-900">
-                  Booking Request Confirmed!
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-600 max-w-md mx-auto leading-relaxed">
-                  Thank you, <strong className="text-gray-900">{formData.name}</strong>. Our booking officer will call or WhatsApp you on <strong className="text-gray-900">{formData.phone}</strong> within 10 minutes with vehicle number and driver details.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setSubmitted(false)}
-                  className="px-6 py-2.5 rounded-lg bg-orange-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-orange-600 transition-colors cursor-pointer"
-                >
-                  Book Another Journey
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="border-b border-gray-100 pb-3 mb-2">
-                  <span className="text-[11px] font-bold text-orange-600 uppercase tracking-widest block">
-                    FAST CHECKOUT PORTAL
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-black text-gray-900">
-                    Enter Traveler &amp; Schedule Details
+          {/* Booking Form (MMT Card Style) */}
+          <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200/90 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-orange-500" />
+                  <h3 className="font-bold text-slate-900 text-base sm:text-lg">
+                    {activeTab === "car" && "Outstation Cab & Taxi Booking"}
+                    {activeTab === "bus" && "Tourist Coach & Bus Ticket Inquiry"}
+                    {activeTab === "flight" && "Patna / Gaya Airport Flight Transfer"}
+                    {activeTab === "hotel" && "Gaya & Bodhgaya Hotel Stay"}
                   </h3>
                 </div>
+                <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                  Govt Authorized
+                </span>
+              </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">Lead Traveler Name *</label>
-                    <div className="relative">
-                      <User className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              {submitted ? (
+                <div className="p-8 text-center bg-gradient-to-b from-emerald-50 to-white rounded-2xl border border-emerald-200 my-6">
+                  <div className="w-16 h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-500/30">
+                    <CheckCircle2 className="w-8 h-8" />
+                  </div>
+                  <h4 className="text-xl font-black text-slate-900 mb-2">Booking Inquiry Received!</h4>
+                  <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto mb-4 font-normal">
+                    Thank you <strong className="text-slate-900">{formData.name || "Customer"}</strong>. Our Gaya operations manager will call you within 10 minutes with vehicle details and driver contact.
+                  </p>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-800">
+                    <Phone className="w-4 h-4 text-orange-600" />
+                    Direct Dispatcher: +91 98765 43210
+                  </div>
+                  <div className="mt-6">
+                    <button
+                      type="button"
+                      onClick={() => setSubmitted(false)}
+                      className="px-6 py-2.5 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-colors"
+                    >
+                      Book Another Ride
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                        Your Full Name *
+                      </label>
                       <input
                         type="text"
                         required
-                        placeholder="e.g. Rajesh Kumar"
+                        placeholder="e.g. Ramesh Kumar"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 focus:border-blue-500 focus:outline-none text-sm font-medium"
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-all font-medium"
                       />
                     </div>
-                  </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">WhatsApp / Mobile Number *</label>
-                    <div className="relative">
-                      <Phone className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                        Mobile Number (WhatsApp) *
+                      </label>
                       <input
                         type="tel"
                         required
                         placeholder="+91 98765 43210"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 focus:border-blue-500 focus:outline-none text-sm font-medium"
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-all font-medium"
                       />
                     </div>
                   </div>
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">Destination *</label>
-                    <select
-                      value={formData.destination}
-                      onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
-                      className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-blue-500 focus:outline-none text-xs sm:text-sm font-medium bg-gray-50 focus:bg-white"
-                    >
-                      <option value="Bodhgaya">Bodhgaya</option>
-                      <option value="Gaya">Gaya</option>
-                      <option value="Patna">Patna</option>
-                      <option value="Rajgir">Rajgir</option>
-                      <option value="All Bihar Circuit">All 4 Cities Circuit</option>
-                    </select>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                        Destination Circuit *
+                      </label>
+                      <select
+                        value={formData.destination}
+                        onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-all font-medium bg-white"
+                      >
+                        <option value="Gaya & Bodhgaya Pilgrimage">Gaya &amp; Bodhgaya Pilgrimage (Vishnupad + Mahabodhi)</option>
+                        <option value="Gaya Pind Daan Special">Gaya Falgu River Pind Daan Special</option>
+                        <option value="Rajgir Glass Bridge & Nalanda">Rajgir Glass Bridge &amp; Nalanda Safari</option>
+                        <option value="Patna Airport to Gaya/Bodhgaya">Patna Airport ⇄ Gaya / Bodhgaya Transfer</option>
+                        <option value="Custom Bihar Circuit">Custom Multi-Day Bihar Circuit</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                        Travel Date *
+                      </label>
+                      <input
+                        type="date"
+                        required
+                        value={formData.travelDate}
+                        onChange={(e) => setFormData({ ...formData, travelDate: e.target.value })}
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-all font-medium bg-white"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                        Preferred Vehicle Category
+                      </label>
+                      <select
+                        value={formData.vehicleModel}
+                        onChange={(e) => setFormData({ ...formData, vehicleModel: e.target.value })}
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-all font-medium bg-white"
+                      >
+                        <option value="Innova Crysta AC">Innova Crysta AC (6+1 Luxury)</option>
+                        <option value="Swift Dzire AC">Swift Dzire / Sedan AC (4+1 Compact)</option>
+                        <option value="Ertiga AC">Maruti Ertiga AC (6+1 Economy)</option>
+                        <option value="Tempo Traveller AC">Deluxe 12-Seater Tempo Traveller</option>
+                        <option value="Luxury Bus">25-45 Seater AC Tourist Coach</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                        Passengers Count
+                      </label>
+                      <select
+                        value={formData.passengers}
+                        onChange={(e) => setFormData({ ...formData, passengers: e.target.value })}
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-all font-medium bg-white"
+                      >
+                        <option value="1">1 Person</option>
+                        <option value="2">2 Persons (Couple)</option>
+                        <option value="4">3-4 Persons (Family)</option>
+                        <option value="6">5-7 Persons (Joint Family)</option>
+                        <option value="12">8-15 Persons (Pilgrim Group)</option>
+                        <option value="20+">20+ Persons (Monks / Sabha)</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">Journey Date *</label>
+                    <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                      Special Request (Panda/Priest for Pind Daan, Wheelchair, Airport Pickup)
+                    </label>
                     <input
-                      type="date"
-                      required
-                      value={formData.travelDate}
-                      onChange={(e) => setFormData({ ...formData, travelDate: e.target.value })}
-                      className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-blue-500 focus:outline-none text-xs sm:text-sm font-medium"
+                      type="text"
+                      placeholder="e.g. Need assistance at Gaya Vishnupad Temple ghat for father"
+                      value={formData.specialRequest}
+                      onChange={(e) => setFormData({ ...formData, specialRequest: e.target.value })}
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-all font-medium"
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">Guests / Vehicle</label>
-                    <select
-                      value={formData.passengers}
-                      onChange={(e) => setFormData({ ...formData, passengers: e.target.value })}
-                      className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-blue-500 focus:outline-none text-xs sm:text-sm font-medium bg-gray-50 focus:bg-white"
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="w-full py-4 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold text-sm uppercase tracking-wider rounded-2xl shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01] active:scale-98"
                     >
-                      <option value="1">1 Guest</option>
-                      <option value="2-3">2-3 (Dzire / Sedan)</option>
-                      <option value="4-6">4-6 (Innova Crysta)</option>
-                      <option value="8-12">8-12 (Deluxe Tempo)</option>
-                      <option value="20+">20+ (Tourist Coach)</option>
-                    </select>
+                      <Send className="w-4 h-4" />
+                      <span>Confirm &amp; Request Instant Fare</span>
+                    </button>
+                    <p className="text-[11px] text-slate-400 text-center mt-2.5">
+                      🔒 No upfront payment required to check availability. Instant quote on WhatsApp.
+                    </p>
                   </div>
-                </div>
+                </form>
+              )}
+            </div>
 
+            {/* Micro Guarantees Strip */}
+            <div className="grid grid-cols-3 gap-2 pt-4 mt-6 border-t border-slate-100 text-center">
+              <div className="text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1">
+                <BadgeCheck className="w-3.5 h-3.5 text-emerald-500" /> Clean AC Cabs
+              </div>
+              <div className="text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1">
+                <BadgeCheck className="w-3.5 h-3.5 text-emerald-500" /> On-Time Pickup
+              </div>
+              <div className="text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1">
+                <BadgeCheck className="w-3.5 h-3.5 text-emerald-500" /> Fixed Toll Included
+              </div>
+            </div>
+          </div>
+
+          {/* Right Visual Image Card (Real Gaya / Bodhgaya fleet experience) */}
+          <div className="lg:col-span-5 flex flex-col gap-4">
+            
+            {/* Top Gaya Special Spotlight Card */}
+            <div className="relative rounded-3xl overflow-hidden shadow-md border border-slate-200 bg-slate-900 text-white p-6 h-64 sm:h-72 flex flex-col justify-end group">
+              <Image
+                src="/images/gaya.jpg"
+                alt="Gaya Falgu River & Vishnupad Temple"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-60"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+              
+              <div className="relative z-10">
+                <span className="px-3 py-1 rounded-full bg-orange-600 text-white font-bold text-[10px] uppercase tracking-wider inline-block mb-2">
+                  Gaya Ji Special
+                </span>
+                <h4 className="text-xl font-black text-white leading-tight">
+                  Vishnupad &amp; Falgu Ghat Pilgrimage Support
+                </h4>
+                <p className="text-xs text-slate-200 mt-1 line-clamp-2 font-light">
+                  Chauffeur drops you directly near temple gate. Authentic guidance for ancestral rites &amp; sacred Akshayavat parikrama.
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Bodhgaya & Luxury Cab Highlight */}
+            <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between flex-1">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-orange-600 block mb-1">
+                  Fleet Quality Promise
+                </span>
+                <h4 className="text-base font-black text-slate-900">
+                  Why Pilgrims Prefer Max Tour &amp; Travel?
+                </h4>
+                
+                <ul className="mt-4 space-y-2.5 text-xs text-slate-600">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <span><strong className="text-slate-800">Experienced Local Drivers:</strong> Well-versed with Gaya lanes, Bodhgaya entry gates &amp; Rajgir ghat roads.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <span><strong className="text-slate-800">No Surge Pricing:</strong> Transparent quotation with all parking, toll tax, and driver bata included.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <span><strong className="text-slate-800">Flight &amp; Train Sync:</strong> Free driver waiting up to 60 mins for delayed Gaya / Patna flights.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">
-                    Special Travel Preferences (Optional)
-                  </label>
-                  <textarea
-                    rows={2}
-                    placeholder="e.g. Airport pickup time, Pind Daan priest arrangement, hotel near temple..."
-                    value={formData.specialRequest}
-                    onChange={(e) => setFormData({ ...formData, specialRequest: e.target.value })}
-                    className="w-full p-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:outline-none text-xs sm:text-sm font-medium"
-                  />
+                  <div className="text-[11px] text-slate-400">Direct Chauffeur Helpline</div>
+                  <div className="text-sm font-black text-slate-900">+91 98765 43210</div>
                 </div>
+                <Link
+                  href="/contact"
+                  className="px-4 py-2 rounded-full bg-slate-100 hover:bg-orange-50 hover:text-orange-600 text-slate-700 text-xs font-bold transition-all"
+                >
+                  Contact Desk →
+                </Link>
+              </div>
+            </div>
 
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    className="w-full py-3.5 rounded-lg bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-md shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    <Send className="w-4 h-4" /> Confirm &amp; Get Instant Quote
-                  </button>
-                  <p className="text-[11px] text-gray-400 text-center mt-2">
-                    🔒 Guaranteed Best Tariff. Instant callback within 10 minutes.
-                  </p>
-                </div>
-              </form>
-            )}
           </div>
 
         </div>

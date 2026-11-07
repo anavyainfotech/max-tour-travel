@@ -1,17 +1,35 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fdfbf7;
-  --foreground: #1c1917;
-  --primary-orange: #f97316;
-  --primary-blue: #0284c7;
+  --background: #f5f7fa;
+  --foreground: #0f172a;
+  --primary-orange: #ff5e14;
+  --primary-blue: #0084ff;
+  --font-poppins: 'Poppins', sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: var(--font-poppins), 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   scroll-behavior: smooth;
+  letter-spacing: -0.01em;
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 @keyframes pulseSlow {
